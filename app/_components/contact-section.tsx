@@ -1,255 +1,288 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import {
-  Send, User, Mail, Phone, Building2, MessageSquare, FileText,
-  CheckCircle2, AlertCircle, MessageCircle
+import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { 
+  Send, 
+  Mail, 
+  Phone, 
+  MessageCircle,
+  User,
+  Building,
+  FileText,
+  CheckCircle,
+  AlertCircle,
+  Sparkles
 } from 'lucide-react';
 
 interface ContactSectionProps {
   t: (key: string) => string;
-  locale?: string;
-}
-
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  subject: string;
-  message: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  message?: string;
+  locale: string;
 }
 
 export function ContactSection({ t, locale }: ContactSectionProps) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [formData, setFormData] = useState<FormData>({
-    name: '', email: '', phone: '', company: '', subject: '', message: '',
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    subject: '',
+    message: '',
   });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const validate = useCallback((): boolean => {
-    const newErrors: FormErrors = {};
-    if (!formData?.name?.trim?.()) newErrors.name = t('contact.required');
-    if (!formData?.email?.trim?.()) {
-      newErrors.email = t('contact.required');
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData?.email ?? '')) {
-      newErrors.email = t('contact.invalidEmail');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const subject = encodeURIComponent(`[Site FCM TECH] ${formData.subject || 'Contato'}`);
+      const body = encodeURIComponent(
+        `Nome: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Telefone: ${formData.phone || 'Não informado'}\n` +
+        `Empresa: ${formData.company || 'Não informado'}\n\n` +
+        `Mensagem:\n${formData.message}`
+      );
+      
+      window.location.href = `mailto:comercial@fcmtech.com.br?subject=${subject}&body=${body}`;
+      
+      setStatus('success');
+      setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
+      
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
     }
-    if (!formData?.message?.trim?.()) newErrors.message = t('contact.required');
-    setErrors(newErrors);
-    return Object.keys(newErrors ?? {})?.length === 0;
-  }, [formData, t]);
+  };
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e?.preventDefault?.();
-    if (!validate()) return;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-    setStatus('sending');
-    
-    // Montar corpo do email
-    const emailBody = `
-Nome: ${formData?.name ?? ''}
-Email: ${formData?.email ?? ''}
-Telefone: ${formData?.phone ?? 'Não informado'}
-Empresa: ${formData?.company ?? 'Não informado'}
-Assunto: ${formData?.subject ?? 'Contato via site'}
-
-Mensagem:
-${formData?.message ?? ''}
-    `.trim();
-    
-    const subject = encodeURIComponent(formData?.subject || 'Contato via Site FCM TECH');
-    const body = encodeURIComponent(emailBody);
-    const mailtoLink = `mailto:comercial@fcmtech.com.br?subject=${subject}&body=${body}`;
-    
-    // Abrir cliente de email
-    window.location.href = mailtoLink;
-    
-    setStatus('success');
-    setFormData({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
-  }, [formData, validate]);
-
-  const handleChange = useCallback((field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...(prev ?? {}), [field]: value }));
-    if (errors?.[field as keyof FormErrors]) {
-      setErrors(prev => ({ ...(prev ?? {}), [field]: undefined }));
-    }
-  }, [errors]);
-
-  const inputFields: { key: keyof FormData; icon: typeof User; required?: boolean; type?: string }[] = [
-    { key: 'name', icon: User, required: true },
-    { key: 'email', icon: Mail, required: true, type: 'email' },
-    { key: 'phone', icon: Phone },
-    { key: 'company', icon: Building2 },
-    { key: 'subject', icon: FileText },
-  ];
+  const inputClasses = "w-full px-4 py-3 bg-white border border-border-light rounded-xl text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent-gold/20 focus:border-accent-gold transition-all";
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative bg-white" ref={ref}>
-      <div className="relative z-10 max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título */}
+    <section 
+      id="contact" 
+      ref={ref}
+      className="relative py-24 md:py-32 bg-white overflow-hidden"
+    >
+      {/* Fundo com gradiente radial */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-bg-tertiary/50 via-transparent to-accent-gold/5" />
+      </div>
+
+      {/* Círculos decorativos */}
+      <div className="absolute top-20 right-20 w-72 h-72 border border-accent-gold/10 rounded-full" />
+      <div className="absolute bottom-20 left-20 w-56 h-56 border border-accent-gold/10 rounded-full" />
+
+      {/* Grid de pontos */}
+      <div className="absolute inset-0 opacity-20">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(212, 175, 55, 0.2) 1px, transparent 0)`,
+            backgroundSize: '32px 32px',
+          }}
+        />
+      </div>
+
+      <div className="container-premium relative z-10 px-4">
+        {/* Header */}
         <motion.div
-          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h2 className="heading-lg font-heading font-bold mb-4 text-text-primary">{t('contact.title')}</h2>
-          <p className="text-body text-text-secondary max-w-xl mx-auto">{t('contact.subtitle')}</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-4">
+            <Sparkles className="w-4 h-4 text-accent-gold" />
+            <span className="text-sm text-accent-gold-dark">Contato</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+            {t('contact.title')}
+          </h2>
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            {t('contact.subtitle')}
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Formulário */}
-          <motion.form
-            onSubmit={handleSubmit}
-            className="md:col-span-2 bg-bg-tertiary border border-border-light rounded-2xl p-6 md:p-8"
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-3"
           >
-            <div className="grid sm:grid-cols-2 gap-5">
-              {inputFields?.map?.((field) => {
-                const Icon = field?.icon ?? User;
-                const err = errors?.[field?.key as keyof FormErrors];
-                return (
-                  <div key={field?.key} className="relative">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">
-                      <Icon size={16} />
-                    </div>
-                    <input
-                      type={field?.type ?? 'text'}
-                      value={formData?.[field?.key] ?? ''}
-                      onChange={(e) => handleChange(field?.key, e?.target?.value ?? '')}
-                      placeholder={t(`contact.${field?.key}`)}
-                      className={`w-full pl-11 pr-4 py-3.5 bg-white border rounded-xl text-sm text-text-primary placeholder:text-text-muted transition-all duration-300 focus:outline-none focus:ring-2 ${
-                        err
-                          ? 'border-red-500/50 focus:ring-red-500/30'
-                          : 'border-border-light focus:border-accent-gold focus:ring-accent-gold/20'
-                      }`}
-                      aria-label={t(`contact.${field?.key}`)}
-                      aria-required={field?.required ?? false}
-                    />
-                    {err && (
-                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                        <AlertCircle size={12} /> {err}
-                      </p>
-                    )}
-                  </div>
-                );
-              }) ?? []}
-            </div>
-
-            {/* Mensagem (textarea) */}
-            <div className="mt-5 relative">
-              <div className="absolute left-4 top-4 text-text-muted">
-                <MessageSquare size={16} />
+            <form onSubmit={handleSubmit} className="bg-bg-tertiary rounded-2xl p-8 border border-border-light">
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder={t('contact.form.name')}
+                    required
+                    className={`${inputClasses} pl-12`}
+                  />
+                </div>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={t('contact.form.email')}
+                    required
+                    className={`${inputClasses} pl-12`}
+                  />
+                </div>
               </div>
-              <textarea
-                value={formData?.message ?? ''}
-                onChange={(e) => handleChange('message', e?.target?.value ?? '')}
-                placeholder={t('contact.message')}
-                rows={5}
-                className={`w-full pl-11 pr-4 py-3.5 bg-white border rounded-xl text-sm text-text-primary placeholder:text-text-muted transition-all duration-300 resize-none focus:outline-none focus:ring-2 ${
-                  errors?.message
-                    ? 'border-red-500/50 focus:ring-red-500/30'
-                    : 'border-border-light focus:border-accent-gold focus:ring-accent-gold/20'
-                }`}
-                aria-label={t('contact.message')}
-                aria-required
-              />
-              {errors?.message && (
-                <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
-                  <AlertCircle size={12} /> {errors?.message}
-                </p>
-              )}
-            </div>
 
-            {/* Botão enviar + feedback */}
-            <div className="mt-6 flex items-center gap-4 flex-wrap">
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="relative">
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder={t('contact.form.phone')}
+                    className={`${inputClasses} pl-12`}
+                  />
+                </div>
+                <div className="relative">
+                  <Building className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    placeholder={t('contact.form.company')}
+                    className={`${inputClasses} pl-12`}
+                  />
+                </div>
+              </div>
+
+              <div className="relative mb-4">
+                <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder={t('contact.form.subject')}
+                  className={`${inputClasses} pl-12`}
+                />
+              </div>
+
+              <div className="relative mb-6">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder={t('contact.form.message')}
+                  required
+                  rows={5}
+                  className={`${inputClasses} resize-none`}
+                />
+              </div>
+
               <button
                 type="submit"
-                disabled={status === 'sending'}
-                className="group flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-accent-gold to-accent-gold-dark text-white font-semibold rounded-full hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-gold"
+                disabled={status === 'loading'}
+                className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-accent-gold text-white rounded-xl font-semibold hover:bg-accent-gold-dark transition-all duration-300 shadow-lg shadow-accent-gold/30 hover:shadow-xl hover:shadow-accent-gold/40 disabled:opacity-70"
               >
-                <Send size={16} className="group-hover:translate-x-0.5 transition-transform" />
-                {status === 'sending' ? t('contact.sending') : t('contact.send')}
+                {status === 'loading' ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    {t('contact.form.submitting')}
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    {t('contact.form.submit')}
+                  </>
+                )}
               </button>
 
+              {/* Status Messages */}
               {status === 'success' && (
-                <motion.p
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="text-sm text-green-600 flex items-center gap-2"
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 flex items-center gap-2 text-green-600 bg-green-50 px-4 py-3 rounded-xl"
                 >
-                  <CheckCircle2 size={16} /> {t('contact.success')}
-                </motion.p>
+                  <CheckCircle className="w-5 h-5" />
+                  {t('contact.form.success')}
+                </motion.div>
               )}
               {status === 'error' && (
-                <motion.p
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="text-sm text-red-500 flex items-center gap-2"
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 flex items-center gap-2 text-red-600 bg-red-50 px-4 py-3 rounded-xl"
                 >
-                  <AlertCircle size={16} /> {t('contact.error')}
-                </motion.p>
+                  <AlertCircle className="w-5 h-5" />
+                  {t('contact.form.error')}
+                </motion.div>
               )}
-            </div>
-          </motion.form>
+            </form>
+          </motion.div>
 
           {/* Sidebar */}
           <motion.div
-            className="bg-bg-tertiary border border-border-light rounded-2xl p-6 md:p-8 flex flex-col justify-between"
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="lg:col-span-2"
           >
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-5">
-                <MessageCircle size={22} className="text-accent-gold" />
+            <div className="bg-bg-tertiary rounded-2xl p-8 border border-border-light h-full">
+              <div className="mb-8">
+                <div className="w-14 h-14 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-4">
+                  <MessageCircle className="w-7 h-7 text-accent-gold" />
+                </div>
+                <h3 className="text-xl font-bold text-text-primary mb-2">
+                  {t('contact.whatsapp')}
+                </h3>
+                <p className="text-text-secondary mb-6">
+                  Resposta rápida em horário comercial
+                </p>
+                <a
+                  href="https://wa.me/5561993270174"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 w-full px-6 py-4 bg-green-500 text-white rounded-xl font-semibold hover:bg-green-600 transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  {t('contact.whatsappCta')}
+                </a>
               </div>
-              <h3 className="font-heading font-semibold text-lg mb-3 text-text-primary">
-                {t('contact.sidebar.title')}
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                {t('contact.sidebar.description')}
-              </p>
-            </div>
 
-            <a
-              href="https://wa.me/5561993700174"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 flex items-center justify-center gap-2 px-6 py-3.5 bg-green-500 text-white rounded-full text-sm font-medium hover:bg-green-600 transition-all duration-300 hover:scale-105"
-            >
-              <MessageCircle size={16} />
-              {t('contact.sidebar.cta')}
-            </a>
-
-            {/* Info de contato */}
-            <div className="mt-6 pt-6 border-t border-border-light space-y-3">
-              <a
-                href="mailto:comercial@fcmtech.com.br"
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-accent-gold transition-colors"
-              >
-                <Mail size={14} />
-                comercial@fcmtech.com.br
-              </a>
-              <a
-                href="tel:+5561993700174"
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-accent-gold transition-colors"
-              >
-                <Phone size={14} />
-                +55 61 99370-0174
-              </a>
+              <div className="border-t border-border-light pt-8">
+                <h4 className="text-sm font-medium text-text-secondary mb-4 uppercase tracking-wider">
+                  Informações de Contato
+                </h4>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-accent-gold" />
+                    <span className="text-text-primary">comercial@fcmtech.com.br</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone className="w-5 h-5 text-accent-gold" />
+                    <span className="text-text-primary">+55 61 99327-0174</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

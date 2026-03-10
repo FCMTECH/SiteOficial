@@ -1,118 +1,182 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Award, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
-import { Award } from 'lucide-react';
 
 interface CasesSectionProps {
   t: (key: string) => string;
 }
 
-// Dados dos cases e clientes
-const mainCases = [
-  { key: 'stn', logo: '/images/clients/stn.png', name: 'STN' },
-  { key: 'tse', logo: '/images/clients/STE.png', name: 'TSE' },
-  { key: 'panasonic', logo: '/images/clients/Panasonic.png', name: 'Panasonic' },
-  { key: 'pfal', logo: '/images/clients/PF-AL.png', name: 'PF-AL' },
-  { key: 'pmdf', logo: '/images/clients/pmdf.png', name: 'PMDF' },
-  { key: 'dpu', logo: '/images/clients/DPU.png', name: 'DPU' },
+const clients = [
+  { name: 'STN', logo: '/images/clients/stn.png' },
+  { name: 'TSE', logo: '/images/clients/STE.png' },
+  { name: 'Panasonic', logo: '/images/clients/Panasonic.png' },
+  { name: 'PF-AL', logo: '/images/clients/PF-AL.png' },
+  { name: 'PMDF', logo: '/images/clients/pmdf.png' },
+  { name: 'DPU', logo: '/images/clients/DPU.png' },
 ];
 
-const partnerLogos = [
-  { src: '/images/clients/ewave.jpeg', name: 'Ewave do Brasil' },
-  { src: '/images/clients/itss.png', name: 'ITSS' },
-  { src: '/images/clients/3corp.png', name: '3Corp' },
-  { src: '/images/clients/skytech.jpg', name: 'SkyTech' },
-  { src: '/images/clients/saga.jpeg', name: 'Saga' },
-  { src: '/images/clients/k2.png', name: 'K2' },
-  { src: '/images/clients/sosdocs.jpeg', name: 'SOSDocs' },
-  { src: '/images/clients/BMG.svg', name: 'BMG' },
-  { src: '/images/clients/INOVAFARMA.png', name: 'Inovafarma' },
-  { src: '/images/clients/Sigecom.png', name: 'Sigecom' },
+const partners = [
+  { name: 'Ewave', logo: '/images/clients/ewave.jpeg' },
+  { name: '3Corp', logo: '/images/clients/3corp.png' },
+  { name: 'BMG', logo: '/images/clients/BMG.svg' },
+  { name: 'Inovafarma', logo: '/images/clients/INOVAFARMA.png' },
+  { name: 'SAGA', logo: '/images/clients/saga.jpeg' },
+  { name: 'Sigecom', logo: '/images/clients/Sigecom.png' },
 ];
 
 export function CasesSection({ t }: CasesSectionProps) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="cases" className="py-24 md:py-32 relative bg-white" ref={ref}>
-      <div className="relative z-10 max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título */}
+    <section 
+      id="cases" 
+      ref={ref}
+      className="relative py-24 md:py-32 bg-white overflow-hidden"
+    >
+      {/* Fundo com linhas diagonais sutis */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 40px,
+              #D4AF37 40px,
+              #D4AF37 41px
+            )`,
+          }}
+        />
+      </div>
+
+      {/* Círculos decorativos */}
+      <div className="absolute top-20 right-10 w-64 h-64 border border-accent-gold/10 rounded-full" />
+      <div className="absolute bottom-20 left-10 w-48 h-48 border border-accent-gold/10 rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-accent-gold/5 rounded-full" />
+
+      <div className="container-premium relative z-10 px-4">
+        {/* Header */}
         <motion.div
-          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
-          <h2 className="heading-lg font-heading font-bold mb-4 text-text-primary">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-4">
+            <TrendingUp className="w-4 h-4 text-accent-gold" />
+            <span className="text-sm text-accent-gold-dark">Resultados</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
             {t('cases.title')}
           </h2>
-          <p className="text-body text-text-secondary max-w-xl mx-auto">
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             {t('cases.subtitle')}
           </p>
         </motion.div>
 
-        {/* Cases cards - grid responsivo */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16">
-          {mainCases?.map?.((c, idx) => (
+        {/* Cases Grid */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+          {[1, 2, 3].map((num, index) => (
             <motion.div
-              key={c?.key}
-              className="group bg-bg-tertiary border border-border-light rounded-2xl p-6 flex flex-col items-center text-center hover:border-accent-gold/30 transition-all duration-500 hover:shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -4 }}
+              key={num}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className="group"
             >
-              <div className="relative w-full aspect-[3/1.5] mb-4 flex items-center justify-center">
-                <Image
-                  src={c?.logo ?? ''}
-                  alt={`Logo ${c?.name ?? ''}`}
-                  fill
-                  className="object-contain p-2 transition-all duration-500"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
+              <div className="relative bg-bg-tertiary rounded-2xl p-8 border border-border-light hover:border-accent-gold/30 transition-all duration-500 hover:shadow-xl hover:shadow-accent-gold/10 hover:-translate-y-2 overflow-hidden h-full">
+                {/* Decoração do canto */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent-gold/10 to-transparent rounded-bl-3xl" />
+                
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-6">
+                    <Award className="w-6 h-6 text-accent-gold" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-text-primary mb-3">
+                    {t(`cases.case${num}.title`)}
+                  </h3>
+                  <p className="text-text-secondary mb-6 leading-relaxed">
+                    {t(`cases.case${num}.description`)}
+                  </p>
+                  
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent-gold/10 rounded-full">
+                    <span className="text-lg font-bold text-accent-gold">
+                      {t(`cases.case${num}.result`)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <p className="text-xs text-text-muted leading-relaxed">
-                {t(`cases.${c?.key}`)}
-              </p>
             </motion.div>
-          )) ?? []}
+          ))}
         </div>
 
-        {/* Carrossel de parceiros */}
+        {/* Clients Logos */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mb-16"
         >
-          <div className="flex items-center gap-2 justify-center mb-8">
-            <Award size={18} className="text-accent-gold" />
-            <h3 className="text-sm font-medium text-text-secondary uppercase tracking-wider">
-              {t('cases.partners')}
-            </h3>
-          </div>
-
-          {/* Grid de parceiros */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 md:gap-8">
-            {partnerLogos?.map?.((p, idx) => (
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-6 lg:gap-8">
+            {clients.map((client, index) => (
               <motion.div
-                key={`partner-${p?.name}-${idx}`}
-                className="relative w-full aspect-[2.5/1] opacity-60 hover:opacity-100 transition-opacity duration-500"
-                initial={{ opacity: 0, y: 10 }}
-                animate={inView ? { opacity: 0.6, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.7 + idx * 0.05 }}
-                whileHover={{ opacity: 1 }}
+                key={client.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.6 + index * 0.05 }}
+                className="group flex items-center justify-center p-4 bg-bg-tertiary rounded-xl border border-border-light hover:border-accent-gold/30 hover:shadow-lg transition-all duration-300"
               >
-                <Image
-                  src={p?.src ?? ''}
-                  alt={`Parceiro de tecnologia ${p?.name ?? ''}`}
-                  fill
-                  className="object-contain filter grayscale hover:grayscale-0 transition-all duration-500"
-                  sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, 20vw"
-                />
+                <div className="relative w-24 h-16 grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-300">
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </motion.div>
-            )) ?? []}
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Partners Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.7 }}
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
+              <div className="w-8 h-px bg-accent-gold/30" />
+              <span>{t('cases.partners')}</span>
+              <div className="w-8 h-px bg-accent-gold/30" />
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            {partners.map((partner, index) => (
+              <motion.div
+                key={partner.name}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.05 }}
+                className="group flex items-center justify-center p-3 rounded-lg hover:bg-bg-tertiary transition-colors"
+              >
+                <div className="relative w-20 h-12 grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-80 transition-all duration-300">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

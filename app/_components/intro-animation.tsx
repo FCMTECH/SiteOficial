@@ -1,228 +1,168 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 interface IntroAnimationProps {
-  t: (key: string) => string;
   onComplete: () => void;
+  t: (key: string) => string;
 }
 
-/**
- * IntroAnimation - Animação de entrada premium e elegante
- * Design minimalista com foco na marca FCM TECH
- */
-export function IntroAnimation({ t, onComplete }: IntroAnimationProps) {
+export function IntroAnimation({ onComplete, t }: IntroAnimationProps) {
   const [phase, setPhase] = useState<'logo' | 'expand' | 'reveal'>('logo');
 
   useEffect(() => {
-    // Timeline da animação
-    // Fase 1: Logo aparece (0-1.2s)
-    const expandTimer = setTimeout(() => setPhase('expand'), 1200);
-    // Fase 2: Expansão dourada (1.2-2.2s)
-    const revealTimer = setTimeout(() => setPhase('reveal'), 2200);
-    // Fase 3: Fade out e completar (2.2-2.8s)
-    const completeTimer = setTimeout(() => onComplete(), 2800);
+    // Fase 1: Logo aparece e fica visível por mais tempo (3.5s)
+    const timer1 = setTimeout(() => setPhase('expand'), 3500);
+    // Fase 2: Expansão mais suave (1.5s)
+    const timer2 = setTimeout(() => setPhase('reveal'), 5000);
+    // Fase 3: Revela o conteúdo (1s de transição)
+    const timer3 = setTimeout(() => onComplete(), 6000);
 
     return () => {
-      clearTimeout(expandTimer);
-      clearTimeout(revealTimer);
-      clearTimeout(completeTimer);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
     };
   }, [onComplete]);
 
-  // Easing premium
-  const easeSmooth = [0.23, 1, 0.32, 1];
-
   return (
-    <AnimatePresence mode="wait">
+    <motion.div
+      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: '#FAFAFA' }}
+      initial={{ opacity: 1 }}
+      animate={{ 
+        opacity: phase === 'reveal' ? 0 : 1,
+      }}
+      transition={{ duration: 1, ease: [0.23, 1, 0.32, 1] }}
+    >
+      {/* Linhas decorativas animadas - mais lentas */}
       <motion.div
-        className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#FAFAFA' }}
-        initial={{ opacity: 1 }}
-        animate={phase === 'reveal' ? { opacity: 0 } : { opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.6, ease: easeSmooth }}
+        className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-gold/30 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: phase === 'logo' ? 1 : 1.5 }}
+        transition={{ duration: 2, ease: [0.23, 1, 0.32, 1], delay: 0.5 }}
+      />
+      <motion.div
+        className="absolute top-[calc(50%-80px)] left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-gold/10 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: phase === 'logo' ? 1 : 1.5 }}
+        transition={{ duration: 2.2, ease: [0.23, 1, 0.32, 1], delay: 0.7 }}
+      />
+      <motion.div
+        className="absolute top-[calc(50%+80px)] left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-gold/10 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: phase === 'logo' ? 1 : 1.5 }}
+        transition={{ duration: 2.2, ease: [0.23, 1, 0.32, 1], delay: 0.7 }}
+      />
+
+      {/* Container central */}
+      <motion.div
+        className="relative flex flex-col items-center"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ 
+          opacity: phase === 'reveal' ? 0 : 1, 
+          y: 0,
+          scale: phase === 'expand' ? 1.05 : 1
+        }}
+        transition={{ 
+          duration: 1.2, 
+          ease: [0.23, 1, 0.32, 1],
+          scale: { duration: 0.8 }
+        }}
       >
-        {/* Background sutil com gradiente */}
+        {/* Logo com brilho suave */}
         <motion.div
-          className="absolute inset-0"
+          className="relative mb-8"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ 
+            scale: 1, 
+            opacity: 1,
+          }}
+          transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1], delay: 0.3 }}
+        >
+          {/* Glow effect atrás do logo */}
+          <motion.div
+            className="absolute inset-0 blur-3xl bg-accent-gold/20 rounded-full"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1.5, opacity: 0.6 }}
+            transition={{ duration: 2, ease: 'easeOut', delay: 0.8 }}
+          />
+          <Image
+            src="/images/logo.png"
+            alt="FCM TECH"
+            width={180}
+            height={180}
+            className="relative z-10"
+            priority
+          />
+        </motion.div>
+
+        {/* Tagline com reveal suave */}
+        <motion.div
+          className="overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          style={{
-            background: 'radial-gradient(ellipse at 50% 50%, rgba(191, 167, 111, 0.08) 0%, transparent 70%)',
-          }}
-        />
-
-        {/* Círculo dourado expandindo */}
-        <motion.div
-          className="absolute rounded-full"
-          style={{
-            background: 'linear-gradient(135deg, #D4C495 0%, #BFA76F 50%, #9A8656 100%)',
-          }}
-          initial={{ 
-            width: 0, 
-            height: 0, 
-            opacity: 0 
-          }}
-          animate={
-            phase === 'expand' || phase === 'reveal'
-              ? { 
-                  width: '250vmax', 
-                  height: '250vmax', 
-                  opacity: phase === 'reveal' ? 0 : 0.15 
-                }
-              : { 
-                  width: 0, 
-                  height: 0, 
-                  opacity: 0 
-                }
-          }
-          transition={{ 
-            duration: 1.2, 
-            ease: easeSmooth 
-          }}
-        />
-
-        {/* Linhas douradas decorativas */}
-        <motion.div
-          className="absolute w-[200px] md:w-[300px] h-[1px]"
-          style={{
-            background: 'linear-gradient(90deg, transparent, #BFA76F, transparent)',
-            top: '35%',
-          }}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={
-            phase === 'logo' || phase === 'expand'
-              ? { scaleX: 1, opacity: 0.6 }
-              : { scaleX: 0, opacity: 0 }
-          }
-          transition={{ duration: 0.8, delay: 0.4, ease: easeSmooth }}
-        />
-        <motion.div
-          className="absolute w-[200px] md:w-[300px] h-[1px]"
-          style={{
-            background: 'linear-gradient(90deg, transparent, #BFA76F, transparent)',
-            bottom: '35%',
-          }}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={
-            phase === 'logo' || phase === 'expand'
-              ? { scaleX: 1, opacity: 0.6 }
-              : { scaleX: 0, opacity: 0 }
-          }
-          transition={{ duration: 0.8, delay: 0.5, ease: easeSmooth }}
-        />
-
-        {/* Conteúdo central */}
-        <div className="relative z-10 text-center flex flex-col items-center">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-            animate={
-              phase === 'reveal'
-                ? { opacity: 0, scale: 1.1, y: -20 }
-                : { opacity: 1, scale: 1, y: 0 }
-            }
-            transition={{ 
-              duration: 0.8, 
-              delay: phase === 'logo' ? 0.1 : 0,
-              ease: easeSmooth 
-            }}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          <motion.p
+            className="text-lg md:text-xl tracking-[0.4em] text-accent-gold font-light"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1], delay: 1.5 }}
           >
-            <Image
-              src="/images/logo.png"
-              alt="FCM TECH"
-              width={180}
-              height={60}
-              className="w-[140px] md:w-[180px] h-auto"
-              priority
+            {t('intro.tagline')}
+          </motion.p>
+        </motion.div>
+
+        {/* Loading dots - mais lentos */}
+        <motion.div
+          className="flex gap-2 mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-2 h-2 rounded-full bg-accent-gold/60"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.4, 1, 0.4],
+              }}
+              transition={{
+                duration: 1.8,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: 'easeInOut',
+              }}
             />
-          </motion.div>
-
-          {/* Tagline */}
-          <motion.div
-            className="mt-6 overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={
-              phase === 'reveal'
-                ? { opacity: 0 }
-                : { opacity: 1 }
-            }
-            transition={{ duration: 0.5, ease: easeSmooth }}
-          >
-            <motion.p
-              className="text-sm md:text-base font-medium tracking-[0.25em] uppercase"
-              style={{ color: '#9A8656' }}
-              initial={{ y: 30, opacity: 0 }}
-              animate={
-                phase === 'logo' || phase === 'expand'
-                  ? { y: 0, opacity: 1 }
-                  : { y: -20, opacity: 0 }
-              }
-              transition={{ duration: 0.7, delay: 0.3, ease: easeSmooth }}
-            >
-              {t('intro.tagline')}
-            </motion.p>
-          </motion.div>
-
-          {/* Indicador de loading elegante */}
-          <motion.div
-            className="mt-8 flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={
-              phase === 'logo'
-                ? { opacity: 1 }
-                : { opacity: 0 }
-            }
-            transition={{ duration: 0.4, delay: 0.6 }}
-          >
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: '#BFA76F' }}
-                animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.4, 1, 0.4],
-                }}
-                transition={{
-                  duration: 1,
-                  delay: i * 0.15,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Bordas decorativas */}
-        <motion.div
-          className="absolute top-8 left-8 w-12 h-12 border-l-2 border-t-2"
-          style={{ borderColor: '#D4C495' }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={
-            phase === 'reveal'
-              ? { opacity: 0, scale: 1.2 }
-              : { opacity: 0.4, scale: 1 }
-          }
-          transition={{ duration: 0.6, delay: 0.2, ease: easeSmooth }}
-        />
-        <motion.div
-          className="absolute bottom-8 right-8 w-12 h-12 border-r-2 border-b-2"
-          style={{ borderColor: '#D4C495' }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={
-            phase === 'reveal'
-              ? { opacity: 0, scale: 1.2 }
-              : { opacity: 0.4, scale: 1 }
-          }
-          transition={{ duration: 0.6, delay: 0.3, ease: easeSmooth }}
-        />
+          ))}
+        </motion.div>
       </motion.div>
-    </AnimatePresence>
+
+      {/* Partículas flutuantes sutis */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-accent-gold/30"
+          style={{
+            left: `${15 + i * 15}%`,
+            top: `${20 + (i % 3) * 25}%`,
+          }}
+          animate={{
+            y: [-15, 15, -15],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{
+            duration: 4 + i * 0.5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: i * 0.4,
+          }}
+        />
+      ))}
+    </motion.div>
   );
 }
