@@ -41,13 +41,26 @@
       "items": ["Agile methodologies", "Structured PMO", "Real-time dashboards", "Risk management"],
       "result": "98% on-time"
     },
-    "webdev": {
-      "title": "Web Development",
-      "subtitle": "Sites and systems"
+    "development": {
+      "title": "Development & Technology",
+      "subtitle": "Complete software, infrastructure and AI solutions",
+      "stack": "Technology Stack",
+      "software": {
+        "title": "Software Development",
+        "items": ["Web and Mobile Applications", "APIs and Microservices", "Enterprise Systems (ERP/CRM)", "E-commerce and Marketplaces", "Portals and Intranets"]
+      },
+      "infra": {
+        "title": "Infrastructure & DevOps",
+        "items": ["Cloud Computing (AWS, Azure, GCP)", "CI/CD and Deploy Automation", "Containers and Kubernetes", "Monitoring and Observability", "Security and Compliance"]
+      },
+      "ai": {
+        "title": "Artificial Intelligence",
+        "items": ["Chatbots and Virtual Assistants", "Machine Learning and Predictive Analysis", "Natural Language Processing", "Generative AI Automation", "LLM Integration (GPT, Claude)"]
+      }
     },
     "branding": {
       "title": "Visual Identity",
-      "subtitle": "Brand and design"
+      "subtitle": "Brand, design and visual communication"
     }
   },
   "cases": {
@@ -107,7 +120,7 @@
   "lgpd": {
     "title": "Your Privacy",
     "subtitle": "We respect your data",
-    "description": "We use cookies and similar technologies to improve your experience, personalize content and analyze our traffic. By continuing to browse, you agree to our Privacy Policy in compliance with data protection regulations.",
+    "description": "We use cookies and similar technologies to improve your experience, personalize content and analyze our traffic. By continuing to browse, you agree to our Privacy Policy.",
     "showDetails": "Show details",
     "hideDetails": "Hide details",
     "necessary": "Necessary Cookies",

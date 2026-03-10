@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Linkedin, MessageCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { Linkedin, MessageCircle, Mail, Phone } from 'lucide-react';
 
 interface FooterProps {
   t: (key: string) => string;
@@ -15,126 +15,60 @@ export function Footer({ t }: FooterProps) {
   };
 
   return (
-    <footer className="relative bg-bg-tertiary border-t border-border-light overflow-hidden">
-      {/* Decoração sutil */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-gold/20 to-transparent" />
-      
-      <div className="container-premium px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-bg-tertiary border-t border-border-light">
+      <div className="container-premium px-4 py-12">
+        <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-10 h-10">
-                <Image
-                  src="/images/logo.png"
-                  alt="FCM TECH"
-                  fill
-                  className="object-contain"
-                />
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="relative w-8 h-8">
+                <Image src="/images/logo.png" alt="FCM TECH" fill className="object-contain" />
               </div>
-              <span className="text-xl font-bold text-text-primary">
-                FCM<span className="text-accent-gold">TECH</span>
-              </span>
+              <span className="text-lg font-bold text-text-primary">FCM<span className="text-accent-gold">TECH</span></span>
             </div>
-            <p className="text-text-secondary text-sm mb-6">
-              {t('footer.tagline')}
-            </p>
-            <div className="flex gap-3">
-              <a
-                href="https://linkedin.com/company/fcmtech"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white border border-border-light flex items-center justify-center text-text-secondary hover:text-accent-gold hover:border-accent-gold/30 transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
+            <p className="text-sm text-text-secondary mb-4">{t('footer.tagline')}</p>
+            <div className="flex gap-2">
+              <a href="https://linkedin.com/company/fcmtech" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-white border border-border-light flex items-center justify-center text-text-secondary hover:text-accent-gold transition-colors">
+                <Linkedin className="w-4 h-4" />
               </a>
-              <a
-                href="https://wa.me/5561993270174"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white border border-border-light flex items-center justify-center text-text-secondary hover:text-green-600 hover:border-green-500/30 transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
+              <a href="https://wa.me/5561993270174" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-white border border-border-light flex items-center justify-center text-text-secondary hover:text-green-600 transition-colors">
+                <MessageCircle className="w-4 h-4" />
               </a>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">
-              {t('footer.services')}
-            </h4>
-            <ul className="space-y-3">
-              {['Consultoria', 'Automação', 'Gestão de Projetos', 'Desenvolvimento Web', 'Identidade Visual'].map((item) => (
-                <li key={item}>
-                  <button
-                    onClick={() => scrollToSection('services')}
-                    className="text-text-secondary hover:text-accent-gold transition-colors text-sm"
-                  >
-                    {item}
-                  </button>
-                </li>
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.services')}</h4>
+            <ul className="space-y-2 text-sm text-text-secondary">
+              {['Consultoria', 'Automação', 'Gestão de Projetos', 'Desenvolvimento', 'Identidade Visual'].map((item) => (
+                <li key={item}><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{item}</button></li>
               ))}
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">
-              {t('footer.company')}
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { label: 'Casos de Sucesso', id: 'cases' },
-                { label: 'Sobre Nós', id: 'about' },
-                { label: 'Contato', id: 'contact' },
-              ].map((item) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-text-secondary hover:text-accent-gold transition-colors text-sm"
-                  >
-                    {item.label}
-                  </button>
-                </li>
-              ))}
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.company')}</h4>
+            <ul className="space-y-2 text-sm text-text-secondary">
+              <li><button onClick={() => scrollToSection('cases')} className="hover:text-accent-gold transition-colors">Cases</button></li>
+              <li><button onClick={() => scrollToSection('about')} className="hover:text-accent-gold transition-colors">Sobre</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="hover:text-accent-gold transition-colors">Contato</button></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-4 uppercase tracking-wider">
-              {t('footer.contact')}
-            </h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-accent-gold mt-0.5" />
-                <span className="text-text-secondary text-sm">comercial@fcmtech.com.br</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-accent-gold mt-0.5" />
-                <span className="text-text-secondary text-sm">+55 61 99327-0174</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-accent-gold mt-0.5" />
-                <span className="text-text-secondary text-sm">Brasília, DF - Brasil</span>
-              </li>
-            </ul>
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.contact')}</h4>
+            <div className="space-y-2 text-sm text-text-secondary">
+              <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-accent-gold" /> comercial@fcmtech.com.br</div>
+              <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-accent-gold" /> +55 61 99327-0174</div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-border-light">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-text-muted">
-              © {currentYear} FCM TECH. {t('footer.rights')}
-            </p>
-            <div className="flex items-center gap-1 text-sm text-text-muted">
-              <span>Feito com</span>
-              <span className="text-accent-gold">♥</span>
-              <span>pela FCM TECH</span>
-            </div>
-          </div>
+        <div className="mt-8 pt-6 border-t border-border-light text-center text-sm text-text-muted">
+          © {currentYear} FCM TECH. {t('footer.rights')}
         </div>
       </div>
     </footer>
