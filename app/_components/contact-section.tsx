@@ -60,8 +60,8 @@ export function ContactSection({ t, locale }: ContactSectionProps) {
   const inputClasses = "w-full px-4 py-3 bg-white border border-border-light rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent-gold/20 focus:border-accent-gold transition-all";
 
   return (
-    <section id="contact" ref={ref} className="py-24 md:py-32 bg-white">
-      <div className="container-premium px-4">
+    <section id="contact" ref={ref} className="py-20 md:py-28 bg-white">
+      <div className="container-premium">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

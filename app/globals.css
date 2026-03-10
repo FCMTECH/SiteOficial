@@ -2,343 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ═══════════════════════════════════════════════════════════════
-   FCM TECH - Design System 2026
-   Tema: Light Mode Elegante & Premium
-   ═══════════════════════════════════════════════════════════════ */
-
 :root {
-  /* Backgrounds - Tons claros sofisticados */
+  /* Light Theme */
   --bg-primary: #FAFAFA;
   --bg-secondary: #FFFFFF;
   --bg-tertiary: #F5F5F5;
-  --bg-elevated: #FFFFFF;
   
-  /* Texto - Escuros para contraste */
+  /* Text */
   --text-primary: #1A1A1A;
-  --text-secondary: #4A4A4A;
-  --text-muted: #7A7A7A;
+  --text-secondary: #666666;
+  --text-muted: #999999;
   
-  /* Accent - Dourado da marca FCM TECH */
-  --accent-gold: #BFA76F;
-  --accent-gold-light: #D4C495;
-  --accent-gold-dark: #9A8656;
+  /* Accent - Gold */
+  --accent-gold: #C5A572;
+  --accent-gold-light: #D4BA8A;
+  --accent-gold-dark: #A68B5B;
   
-  /* Accent secundários */
-  --accent-blue: #2563EB;
-  --accent-teal: #0D9488;
-  
-  /* Utilitários */
+  /* Borders */
   --border-light: #E5E5E5;
-  --border-medium: #D4D4D4;
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
-  --shadow-gold: 0 4px 20px rgba(191, 167, 111, 0.25);
+  --border-medium: #D0D0D0;
   
-  /* Easing premium */
+  /* Premium easing */
   --ease-premium: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Supressão de erros de hidratação */
-[data-hydration-error] { display: none !important; }
-
-html {
-  scroll-behavior: smooth;
-  background-color: var(--bg-primary);
-  color-scheme: light;
+/* Suppress hydration warnings */
+[data-hydration-error] {
+  display: none !important;
 }
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Container Premium - Centralizado com margens */
+.container-premium {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-/* Scrollbar elegante */
+@media (min-width: 768px) {
+  .container-premium {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-premium {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Section wrapper */
+.section-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-tertiary);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--border-medium);
+  background: var(--accent-gold);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-gold);
+  background: var(--accent-gold-dark);
 }
 
-/* Seleção de texto */
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
 ::selection {
-  background-color: rgba(191, 167, 111, 0.25);
-  color: var(--text-primary);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Tipografia Fluida
-   ═══════════════════════════════════════════════════════════════ */
-
-.heading-xl {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-}
-
-.heading-lg {
-  font-size: clamp(1.75rem, 4vw, 3rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-}
-
-.heading-md {
-  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  font-weight: 600;
-}
-
-.heading-sm {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.4;
-  font-weight: 500;
-}
-
-.text-body {
-  font-size: clamp(1rem, 1.2vw, 1.125rem);
-  line-height: 1.7;
-}
-
-.text-body-sm {
-  font-size: clamp(0.875rem, 1vw, 1rem);
-  line-height: 1.6;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Efeitos e Decorações
-   ═══════════════════════════════════════════════════════════════ */
-
-/* Gradiente dourado da marca */
-.gradient-gold {
-  background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, var(--accent-gold-dark) 100%);
-}
-
-.gradient-gold-text {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Linha decorativa dourada */
-.gold-line {
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-}
-
-/* Cards com hover elegante */
-.card-elevated {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.4s var(--ease-premium);
-}
-
-.card-elevated:hover {
-  border-color: var(--accent-gold-light);
-  box-shadow: var(--shadow-gold);
-  transform: translateY(-4px);
-}
-
-/* Botão primário dourado */
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+  background: var(--accent-gold);
   color: white;
-  font-weight: 600;
-  padding: 14px 32px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-premium);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-gold);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-/* Botão secundário/ghost */
-.btn-secondary {
-  background: transparent;
-  color: var(--text-primary);
-  font-weight: 500;
-  padding: 14px 32px;
-  border-radius: 12px;
-  border: 2px solid var(--border-medium);
-  cursor: pointer;
-  transition: all 0.3s var(--ease-premium);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold-dark);
-}
-
-/* Animação de pulse elegante */
-@keyframes pulse-gold {
-  0%, 100% { 
-    box-shadow: 0 0 0 0 rgba(191, 167, 111, 0.4);
-  }
-  50% { 
-    box-shadow: 0 0 0 12px rgba(191, 167, 111, 0);
-  }
-}
-
-.btn-pulse {
-  animation: pulse-gold 2.5s ease-in-out infinite;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Animações de Entrada
-   ═══════════════════════════════════════════════════════════════ */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Reveal classes */
-.reveal-up {
-  animation: fadeInUp 0.8s var(--ease-premium) forwards;
-}
-
-.reveal-scale {
-  animation: fadeInScale 0.8s var(--ease-premium) forwards;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Background Patterns
-   ═══════════════════════════════════════════════════════════════ */
-
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(rgba(191, 167, 111, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(191, 167, 111, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-.bg-gradient-hero {
-  background: linear-gradient(180deg, 
-    var(--bg-secondary) 0%, 
-    var(--bg-primary) 50%,
-    var(--bg-tertiary) 100%
-  );
-}
-
-/* Carrossel infinito */
-@keyframes scroll-infinite {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.carousel-track {
-  animation: scroll-infinite 30s linear infinite;
-}
-
-.carousel-track:hover {
-  animation-play-state: paused;
-}
-
-/* Focus visible para acessibilidade */
-:focus-visible {
-  outline: 2px solid var(--accent-gold);
-  outline-offset: 2px;
-}
-
-/* Input styling */
-.input-field {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-  padding: 14px 16px;
-  font-size: 1rem;
-  color: var(--text-primary);
-  transition: all 0.3s var(--ease-premium);
-  width: 100%;
-}
-
-.input-field:focus {
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px rgba(191, 167, 111, 0.15);
-  outline: none;
-}
-
-.input-field::placeholder {
-  color: var(--text-muted);
-}
-
-/* Utilitários */
-.text-gold {
-  color: var(--accent-gold);
-}
-
-.bg-gold {
-  background-color: var(--accent-gold);
-}
-
-.border-gold {
-  border-color: var(--accent-gold);
 }

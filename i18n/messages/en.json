@@ -41,9 +41,22 @@
       "items": ["Agile methodologies", "Structured PMO", "Real-time dashboards", "Risk management"],
       "result": "98% on-time"
     },
-    "webDev": {
-      "title": "Web Development",
-      "description": "Custom sites, systems and applications"
+    "development": {
+      "title": "Development & Technology",
+      "subtitle": "Complete software, infrastructure and AI solutions",
+      "stack": "Technology Stack",
+      "software": {
+        "title": "Software Development",
+        "items": ["Web and Mobile Applications", "APIs and Microservices", "Enterprise Systems (ERP/CRM)", "E-commerce and Marketplaces", "Portals and Intranets"]
+      },
+      "infra": {
+        "title": "Infrastructure & DevOps",
+        "items": ["Cloud Computing (AWS, Azure, GCP)", "CI/CD and Deploy Automation", "Containers and Kubernetes", "Monitoring and Observability", "Security and Compliance"]
+      },
+      "ai": {
+        "title": "Artificial Intelligence",
+        "items": ["Chatbots and Virtual Assistants", "Machine Learning and Predictive Analysis", "Natural Language Processing", "Generative AI Automation", "LLM Integration (GPT, Claude)"]
+      }
     },
     "branding": {
       "title": "Visual Identity",
@@ -73,10 +86,25 @@
   "about": {
     "title": "About FCM TECH",
     "description": "We are specialists in digital transformation, combining cutting-edge technology with proven methodologies to deliver exceptional results. Our mission is to simplify complex processes and boost our clients' growth.",
+    "description2": "With over 8 years of experience in the market, we have already helped dozens of companies modernize their operations, from startups to large corporations in the public and private sectors.",
     "stats": {
       "projects": "Projects Delivered",
       "clients": "Active Clients",
       "years": "Years in Market"
+    },
+    "values": {
+      "focus": {
+        "title": "Focus on Results",
+        "description": "Measurable deliveries and immediate application"
+      },
+      "security": {
+        "title": "Security & Trust",
+        "description": "Secure and transparent processes"
+      },
+      "agility": {
+        "title": "Agility",
+        "description": "Fast and efficient responses"
+      }
     }
   },
   "contact": {
@@ -108,20 +136,21 @@
       "consulting": "Consulting",
       "automation": "Automation",
       "management": "Project Management",
-      "webDev": "Web Development",
+      "development": "Development",
       "branding": "Visual Identity"
     },
     "company": {
       "cases": "Success Cases",
-      "contact": "Let's Talk"
+      "about": "About Us",
+      "contact": "Contact"
     },
-    "contactTitle": "Let's Talk",
+    "contactTitle": "Contact",
     "copyright": "© 2024 FCM TECH. All rights reserved."
   },
   "lgpd": {
     "title": "Your Privacy",
     "subtitle": "We respect your data",
-    "description": "We use cookies and similar technologies to improve your experience, personalize content and analyze our traffic. By continuing to browse, you agree to our Privacy Policy.",
+    "description": "We use cookies and similar technologies to improve your experience, personalize content and analyze our traffic.",
     "showDetails": "Show details",
     "hideDetails": "Hide details",
     "necessary": "Necessary Cookies",

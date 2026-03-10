@@ -41,9 +41,22 @@
       "items": ["Metodologias ágeis", "PMO estruturado", "Dashboards em tempo real", "Gestão de riscos"],
       "result": "98% on-time"
     },
-    "webDev": {
-      "title": "Desenvolvimento Web",
-      "description": "Sites, sistemas e aplicações à medida"
+    "development": {
+      "title": "Desenvolvimento & Tecnologia",
+      "subtitle": "Soluções completas de software, infraestrutura e IA",
+      "stack": "Stack de Tecnologias",
+      "software": {
+        "title": "Desenvolvimento de Software",
+        "items": ["Aplicações Web e Mobile", "APIs e Microsserviços", "Sistemas Corporativos (ERP/CRM)", "E-commerce e Marketplaces", "Portais e Intranets"]
+      },
+      "infra": {
+        "title": "Infraestrutura & DevOps",
+        "items": ["Cloud Computing (AWS, Azure, GCP)", "CI/CD e Automação de Deploy", "Containers e Kubernetes", "Monitorização e Observabilidade", "Segurança e Compliance"]
+      },
+      "ai": {
+        "title": "Inteligência Artificial",
+        "items": ["Chatbots e Assistentes Virtuais", "Machine Learning e Análise Preditiva", "Processamento de Linguagem Natural", "Automação com IA Generativa", "Integração com LLMs (GPT, Claude)"]
+      }
     },
     "branding": {
       "title": "Identidade Visual",
@@ -73,10 +86,25 @@
   "about": {
     "title": "Sobre a FCM TECH",
     "description": "Somos especialistas em transformação digital, combinando tecnologia de ponta com metodologias comprovadas para entregar resultados excepcionais. A nossa missão é simplificar processos complexos e potenciar o crescimento dos nossos clientes.",
+    "description2": "Com mais de 8 anos de experiência no mercado, já ajudámos dezenas de empresas a modernizarem as suas operações, desde startups até grandes corporações dos setores público e privado.",
     "stats": {
       "projects": "Projetos Entregues",
       "clients": "Clientes Ativos",
       "years": "Anos no Mercado"
+    },
+    "values": {
+      "focus": {
+        "title": "Foco em Resultados",
+        "description": "Entregas mensuráveis e aplicação imediata"
+      },
+      "security": {
+        "title": "Segurança & Confiança",
+        "description": "Processos seguros e transparentes"
+      },
+      "agility": {
+        "title": "Agilidade",
+        "description": "Respostas rápidas e eficientes"
+      }
     }
   },
   "contact": {
@@ -108,20 +136,21 @@
       "consulting": "Consultoria",
       "automation": "Automação",
       "management": "Gestão de Projetos",
-      "webDev": "Desenvolvimento Web",
+      "development": "Desenvolvimento",
       "branding": "Identidade Visual"
     },
     "company": {
       "cases": "Casos de Sucesso",
-      "contact": "Vamos Conversar"
+      "about": "Sobre Nós",
+      "contact": "Contacto"
     },
-    "contactTitle": "Vamos Conversar",
+    "contactTitle": "Contacto",
     "copyright": "© 2024 FCM TECH. Todos os direitos reservados."
   },
   "lgpd": {
     "title": "A Sua Privacidade",
     "subtitle": "Respeitamos os seus dados",
-    "description": "Utilizamos cookies e tecnologias semelhantes para melhorar a sua experiência, personalizar conteúdo e analisar o nosso tráfego. Ao continuar a navegar, concorda com a nossa Política de Privacidade.",
+    "description": "Utilizamos cookies e tecnologias semelhantes para melhorar a sua experiência, personalizar conteúdo e analisar o nosso tráfego.",
     "showDetails": "Ver detalhes",
     "hideDetails": "Ocultar detalhes",
     "necessary": "Cookies Necessários",
