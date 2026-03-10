@@ -1,11 +1,13 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import type { Locale } from '@/i18n/config';
+import { AnimatePresence, motion } from 'framer-motion';
 import { locales, defaultLocale } from '@/i18n/config';
+import type { Locale } from '@/i18n/config';
+import en from '@/i18n/messages/en.json';
 import ptBR from '@/i18n/messages/pt-BR.json';
 import ptPT from '@/i18n/messages/pt-PT.json';
-import en from '@/i18n/messages/en.json';
+
 import { IntroAnimation } from './intro-animation';
 import { Header } from './header';
 import { HeroSection } from './hero-section';
@@ -15,79 +17,91 @@ import { AboutSection } from './about-section';
 import { ContactSection } from './contact-section';
 import { Footer } from './footer';
 import { WhatsAppButton } from './whatsapp-button';
+import { LGPDConsent } from './lgpd-consent';
 
-// Mapa de mensagens por idioma
-const messagesMap: Record<Locale, Record<string, unknown>> = {
-  'pt-BR': ptBR as unknown as Record<string, unknown>,
-  'pt-PT': ptPT as unknown as Record<string, unknown>,
-  'en': en as unknown as Record<string, unknown>,
+const messages: Record<Locale, typeof en> = {
+  en,
+  'pt-BR': ptBR,
+  'pt-PT': ptPT,
 };
 
 export function ClientApp() {
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [introComplete, setIntroComplete] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
+  const [locale, setLocale] = useState<Locale>(defaultLocale);
 
-  // Detectar idioma no mount
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage?.getItem?.('fcm-locale');
-    if (saved && locales.includes(saved as Locale)) {
-      setLocale(saved as Locale);
+    const savedLocale = localStorage.getItem('locale') as Locale;
+    if (savedLocale && locales.includes(savedLocale)) {
+      setLocale(savedLocale);
     } else {
-      const browserLang = navigator?.language ?? '';
-      if (browserLang?.startsWith?.('pt')) {
+      const browserLang = navigator.language;
+      if (browserLang.startsWith('pt-BR')) {
         setLocale('pt-BR');
-      } else if (browserLang?.startsWith?.('en')) {
-        setLocale('en');
+      } else if (browserLang.startsWith('pt')) {
+        setLocale('pt-PT');
       } else {
-        setLocale('pt-BR');
+        setLocale('en');
       }
     }
   }, []);
 
-  const changeLocale = useCallback((newLocale: Locale) => {
+  const handleLocaleChange = useCallback((newLocale: Locale) => {
     setLocale(newLocale);
-    localStorage?.setItem?.('fcm-locale', newLocale);
+    localStorage.setItem('locale', newLocale);
   }, []);
 
   const t = useCallback((key: string): string => {
-    const keys = key?.split?.('.') ?? [];
-    let value: unknown = messagesMap[locale] ?? {};
+    const keys = key.split('.');
+    let value: unknown = messages[locale];
     for (const k of keys) {
-      value = (value as Record<string, unknown>)?.[k];
+      if (value && typeof value === 'object' && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return key;
+      }
     }
-    if (typeof value === 'string') return value;
-    return key;
+    return typeof value === 'string' ? value : key;
   }, [locale]);
 
   const tArray = useCallback((key: string): string[] => {
-    const keys = key?.split?.('.') ?? [];
-    let value: unknown = messagesMap[locale] ?? {};
+    const keys = key.split('.');
+    let value: unknown = messages[locale];
     for (const k of keys) {
-      value = (value as Record<string, unknown>)?.[k];
+      if (value && typeof value === 'object' && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return [];
+      }
     }
-    if (Array.isArray(value)) return value as string[];
-    return [];
+    return Array.isArray(value) ? value : [];
   }, [locale]);
-
-  // Para sites estáticos: mostrar conteúdo diretamente sem animação de intro
-  const showIntro = mounted && !introComplete;
 
   return (
     <>
-      {showIntro && (
-        <IntroAnimation
-          t={t}
-          onComplete={() => setIntroComplete(true)}
-        />
-      )}
-      <div
-        className={`transition-opacity duration-700 ${
-          !mounted || introComplete ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+      {/* Intro Animation */}
+      <AnimatePresence>
+        {mounted && !introComplete && (
+          <IntroAnimation 
+            onComplete={() => setIntroComplete(true)} 
+            t={t}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Main Content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: mounted && introComplete ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        className={mounted && introComplete ? 'opacity-100' : 'opacity-0'}
       >
-        <Header t={t} locale={locale} onLocaleChange={changeLocale} />
+        <Header 
+          locale={locale} 
+          onLocaleChange={handleLocaleChange} 
+          t={t} 
+        />
         <main>
           <HeroSection t={t} />
           <ServicesSection t={t} tArray={tArray} />
@@ -97,7 +111,10 @@ export function ClientApp() {
         </main>
         <Footer t={t} />
         <WhatsAppButton />
-      </div>
+        
+        {/* LGPD Consent Banner */}
+        <LGPDConsent t={t} />
+      </motion.div>
     </>
   );
 }

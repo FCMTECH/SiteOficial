@@ -3,107 +3,124 @@
     "title": "FCM TECH — Automação. Gestão & Performance",
     "description": "Consultorias práticas, automações, gestão de projetos e identidade visual — entregamos resultado mensurável e aplicação imediata."
   },
+  "intro": {
+    "tagline": "Automação • Gestão • Performance"
+  },
   "nav": {
     "services": "Serviços",
     "cases": "Cases",
     "about": "Sobre",
     "contact": "Contacto",
-    "cta": "Solicitar Proposta"
+    "cta": "Fale Connosco"
   },
   "hero": {
-    "kicker": "FCM TECH",
+    "kicker": "Tecnologia que transforma negócios",
     "headline": "Automação. Gestão & Performance",
-    "subheadline": "Consultorias práticas, automações nas ferramentas que já utiliza, gestão de projetos e identidade visual — entregamos resultado mensurável e aplicação imediata.",
-    "cta1": "Solicitar Proposta",
-    "cta2": "Ver Serviços"
+    "subheadline": "Consultorias práticas, automações, gestão de projetos e identidade visual — entregamos resultado mensurável e aplicação imediata.",
+    "cta": "Iniciar Projeto",
+    "ctaSecondary": "Ver Casos de Sucesso"
   },
   "services": {
-    "title": "Os Nossos Serviços",
-    "subtitle": "Soluções completas para transformar a operação do seu negócio",
+    "title": "O que fazemos",
+    "subtitle": "Soluções completas para transformar o seu negócio",
     "consulting": {
-      "title": "Consultorias",
-      "subtitle": "Otimização de Processos e Financeiro",
-      "items": ["Diagnóstico completo", "Mapa de processos", "Plano de ação com KPIs", "Painel financeiro", "Capacitação da equipa"],
-      "result": "Redução de custos e aumento consistente de faturação"
+      "title": "Consultoria",
+      "subtitle": "Estratégia e processos",
+      "items": ["Diagnóstico operacional", "Mapeamento de processos", "Planeamento estratégico", "Gestão de mudanças"],
+      "result": "+40% eficiência"
     },
     "automation": {
-      "title": "Automações",
-      "subtitle": "Google, Microsoft, Zapier/Make",
-      "items": ["Apps Script, Folhas de cálculo, Forms", "Power Automate, Power BI", "Integrações via API / Zapier / Make", "Documentação e testes"],
-      "result": "Menos retrabalho e decisões mais rápidas"
+      "title": "Automação",
+      "subtitle": "RPA e integrações",
+      "items": ["Automação de processos", "Integrações de sistemas", "Chatbots e IA", "Workflows inteligentes"],
+      "result": "-60% tempo manual"
     },
-    "projectMgmt": {
+    "management": {
       "title": "Gestão de Projetos",
-      "subtitle": "Ágil & Tradicional",
-      "items": ["Planeamento e âmbito", "Roadmaps e Sprints", "Relatórios e mitigação de riscos", "ClickUp, Jira, Asana, MS Project"],
-      "result": "Entregas previsíveis e controlo executivo"
+      "subtitle": "Entregas no prazo",
+      "items": ["Metodologias ágeis", "PMO estruturado", "Dashboards em tempo real", "Gestão de riscos"],
+      "result": "98% on-time"
     },
-    "webDev": {
-      "title": "Criação de Sites",
-      "description": "Protótipos rápidos, SEO básico, formulários integrados e deploy profissional."
+    "webdev": {
+      "title": "Desenvolvimento Web",
+      "subtitle": "Sites e sistemas"
     },
     "branding": {
       "title": "Identidade Visual",
-      "description": "Ficheiros vetoriais, brandbook, templates e material impresso/digital."
+      "subtitle": "Marca e design"
     }
   },
   "cases": {
-    "title": "Cases & Clientes",
-    "subtitle": "Empresas que confiam na FCM TECH",
-    "stn": "Gestão operacional e melhoria de faturação",
-    "tse": "Coordenação de equipa e infraestrutura crítica",
-    "panasonic": "Orquestração da implantação e adoção",
-    "pfal": "Orquestração da implantação e adoção",
-    "pmdf": "Orquestração da implantação e adoção",
-    "dpu": "Orquestração da implantação e adoção",
-    "partners": "Parceiros de Tecnologia"
+    "title": "Casos de Sucesso",
+    "subtitle": "Resultados reais para empresas reais",
+    "partners": "Parceiros e Tecnologias",
+    "case1": {
+      "title": "Automação Fiscal",
+      "description": "Redução de 80% no tempo de processamento de faturas para empresa do setor de retalho.",
+      "result": "-80% tempo"
+    },
+    "case2": {
+      "title": "PMO Integrado",
+      "description": "Implementação de escritório de projetos que aumentou a taxa de sucesso em 45%.",
+      "result": "+45% sucesso"
+    },
+    "case3": {
+      "title": "Chatbot IA",
+      "description": "Atendimento automatizado 24/7 que reduziu custos operacionais em 60%.",
+      "result": "-60% custos"
+    }
   },
   "about": {
     "title": "Sobre a FCM TECH",
-    "p1": "Somos uma consultoria de tecnologia focada em resultados práticos e mensuráveis. Combinamos automação, gestão de projetos e estratégia para transformar a operação de empresas de todos os portes.",
-    "p2": "A nossa abordagem é direta: diagnóstico preciso, implementação rápida e acompanhamento contínuo. Trabalhamos com as ferramentas que a sua equipa já conhece, eliminando curvas de aprendizagem.",
-    "stat1Label": "Projetos Entregues",
-    "stat1Value": "150",
-    "stat2Label": "Clientes Ativos",
-    "stat2Value": "40",
-    "stat3Label": "Anos de Mercado",
-    "stat3Value": "8"
+    "description": "Somos especialistas em transformação digital, combinando tecnologia de ponta com metodologias comprovadas para entregar resultados excepcionais. A nossa missão é simplificar processos complexos e potenciar o crescimento dos nossos clientes.",
+    "stats": {
+      "projects": "Projetos Entregues",
+      "clients": "Clientes Ativos",
+      "years": "Anos no Mercado"
+    }
   },
   "contact": {
-    "title": "Contacto",
-    "subtitle": "Fale connosco para um diagnóstico inicial gratuito. Envie os dados do projeto e retornamos com proposta prática.",
-    "name": "Nome completo",
-    "email": "E-mail",
-    "phone": "Telefone",
-    "company": "Empresa",
-    "subject": "Assunto",
-    "message": "Conte-nos sobre o seu desafio",
-    "send": "Enviar Mensagem",
-    "sending": "A enviar...",
-    "success": "Mensagem enviada com sucesso! Retornamos em breve.",
-    "error": "Erro ao enviar. Tente novamente.",
-    "required": "Campo obrigatório",
-    "invalidEmail": "E-mail inválido",
-    "sidebar": {
-      "title": "Agende uma conversa",
-      "description": "Sessões de discovery de 30 minutos para mapear rapidamente oportunidades de automação.",
-      "cta": "Agendar via WhatsApp"
-    }
+    "title": "Vamos Conversar",
+    "subtitle": "Entre em contacto e descubra como podemos transformar o seu negócio",
+    "form": {
+      "name": "Nome completo",
+      "email": "E-mail",
+      "phone": "Telefone",
+      "company": "Empresa",
+      "subject": "Assunto",
+      "message": "Mensagem",
+      "submit": "Enviar Mensagem",
+      "submitting": "A enviar...",
+      "success": "Mensagem enviada com sucesso!",
+      "error": "Erro ao enviar. Tente novamente."
+    },
+    "whatsapp": "Prefere WhatsApp?",
+    "whatsappCta": "Chamar no WhatsApp"
   },
   "footer": {
     "tagline": "Automação. Gestão & Performance",
-    "servicesTitle": "Serviços",
-    "companyTitle": "Empresa",
-    "copyright": "© {year} FCM TECH. Todos os direitos reservados."
+    "services": "Serviços",
+    "company": "Empresa",
+    "contact": "Contacto",
+    "rights": "Todos os direitos reservados."
   },
-  "intro": {
-    "line1": "FCM TECH",
-    "line2": "Automação. Gestão & Performance",
-    "tagline": "Automação • Gestão • Performance"
-  },
-  "language": {
-    "pt-BR": "Português (Brasil)",
-    "pt-PT": "Português",
-    "en": "English"
+  "lgpd": {
+    "title": "A Sua Privacidade",
+    "subtitle": "Respeitamos os seus dados",
+    "description": "Utilizamos cookies e tecnologias semelhantes para melhorar a sua experiência, personalizar conteúdo e analisar o nosso tráfego. Ao continuar a navegar, concorda com a nossa Política de Privacidade em conformidade com o RGPD (Regulamento Geral de Proteção de Dados).",
+    "showDetails": "Ver detalhes",
+    "hideDetails": "Ocultar detalhes",
+    "necessary": "Cookies Necessários",
+    "necessaryDesc": "Essenciais para o funcionamento do site",
+    "analytics": "Cookies de Análise",
+    "analyticsDesc": "Ajudam-nos a entender como utiliza o site",
+    "marketing": "Cookies de Marketing",
+    "marketingDesc": "Usados para publicidade personalizada",
+    "required": "Obrigatório",
+    "optional": "Opcional",
+    "acceptNecessary": "Aceitar Necessários",
+    "acceptAll": "Aceitar Todos",
+    "privacyNote": "Para mais informações, consulte a nossa",
+    "privacyLink": "Política de Privacidade"
   }
 }

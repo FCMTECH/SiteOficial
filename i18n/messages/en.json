@@ -1,109 +1,126 @@
 {
   "meta": {
     "title": "FCM TECH — Automation. Management & Performance",
-    "description": "Practical consulting, automation with tools you already use, project management and visual identity — we deliver measurable results and immediate application."
+    "description": "Practical consulting, automation, project management and visual identity — we deliver measurable results and immediate application."
+  },
+  "intro": {
+    "tagline": "Automation • Management • Performance"
   },
   "nav": {
     "services": "Services",
     "cases": "Cases",
     "about": "About",
     "contact": "Contact",
-    "cta": "Get a Quote"
+    "cta": "Contact Us"
   },
   "hero": {
-    "kicker": "FCM TECH",
+    "kicker": "Technology that transforms business",
     "headline": "Automation. Management & Performance",
-    "subheadline": "Practical consulting, automation with tools you already use, project management and visual identity — we deliver measurable results and immediate application.",
-    "cta1": "Get a Quote",
-    "cta2": "View Services"
+    "subheadline": "Practical consulting, automation, project management and visual identity — we deliver measurable results and immediate application.",
+    "cta": "Start Project",
+    "ctaSecondary": "View Success Cases"
   },
   "services": {
-    "title": "Our Services",
-    "subtitle": "Complete solutions to transform your business operations",
+    "title": "What We Do",
+    "subtitle": "Complete solutions to transform your business",
     "consulting": {
       "title": "Consulting",
-      "subtitle": "Process & Financial Optimization",
-      "items": ["Complete diagnosis", "Process mapping", "Action plan with KPIs", "Financial dashboard", "Team training"],
-      "result": "Cost reduction and consistent revenue growth"
+      "subtitle": "Strategy and processes",
+      "items": ["Operational diagnosis", "Process mapping", "Strategic planning", "Change management"],
+      "result": "+40% efficiency"
     },
     "automation": {
       "title": "Automation",
-      "subtitle": "Google, Microsoft, Zapier/Make",
-      "items": ["Apps Script, Sheets, Forms", "Power Automate, Power BI", "API integrations / Zapier / Make", "Documentation and testing"],
-      "result": "Less rework and faster decisions"
+      "subtitle": "RPA and integrations",
+      "items": ["Process automation", "System integrations", "Chatbots and AI", "Smart workflows"],
+      "result": "-60% manual time"
     },
-    "projectMgmt": {
+    "management": {
       "title": "Project Management",
-      "subtitle": "Agile & Traditional",
-      "items": ["Planning and scope", "Roadmaps and Sprints", "Reports and risk mitigation", "ClickUp, Jira, Asana, MS Project"],
-      "result": "Predictable deliveries and executive control"
+      "subtitle": "On-time deliveries",
+      "items": ["Agile methodologies", "Structured PMO", "Real-time dashboards", "Risk management"],
+      "result": "98% on-time"
     },
-    "webDev": {
+    "webdev": {
       "title": "Web Development",
-      "description": "Rapid prototypes, basic SEO, integrated forms and professional deployment."
+      "subtitle": "Sites and systems"
     },
     "branding": {
       "title": "Visual Identity",
-      "description": "Vector files, brandbook, templates and print/digital materials."
+      "subtitle": "Brand and design"
     }
   },
   "cases": {
-    "title": "Cases & Clients",
-    "subtitle": "Companies that trust FCM TECH",
-    "stn": "Operational management and revenue improvement",
-    "tse": "Team coordination and critical infrastructure",
-    "panasonic": "Implementation orchestration and adoption",
-    "pfal": "Implementation orchestration and adoption",
-    "pmdf": "Implementation orchestration and adoption",
-    "dpu": "Implementation orchestration and adoption",
-    "partners": "Technology Partners"
+    "title": "Success Cases",
+    "subtitle": "Real results for real companies",
+    "partners": "Partners and Technologies",
+    "case1": {
+      "title": "Fiscal Automation",
+      "description": "80% reduction in invoice processing time for a retail company.",
+      "result": "-80% time"
+    },
+    "case2": {
+      "title": "Integrated PMO",
+      "description": "Project office implementation that increased success rate by 45%.",
+      "result": "+45% success"
+    },
+    "case3": {
+      "title": "AI Chatbot",
+      "description": "24/7 automated service that reduced operational costs by 60%.",
+      "result": "-60% costs"
+    }
   },
   "about": {
     "title": "About FCM TECH",
-    "p1": "We are a technology consultancy focused on practical and measurable results. We combine automation, project management and strategy to transform operations of companies of all sizes.",
-    "p2": "Our approach is direct: precise diagnosis, rapid implementation and continuous monitoring. We work with the tools your team already knows, eliminating learning curves.",
-    "stat1Label": "Projects Delivered",
-    "stat1Value": "150",
-    "stat2Label": "Active Clients",
-    "stat2Value": "40",
-    "stat3Label": "Years in Market",
-    "stat3Value": "8"
+    "description": "We are specialists in digital transformation, combining cutting-edge technology with proven methodologies to deliver exceptional results. Our mission is to simplify complex processes and boost our clients' growth.",
+    "stats": {
+      "projects": "Projects Delivered",
+      "clients": "Active Clients",
+      "years": "Years in Market"
+    }
   },
   "contact": {
-    "title": "Contact",
-    "subtitle": "Talk to us for a free initial diagnosis. Send your project details and we'll respond with a practical proposal.",
-    "name": "Full name",
-    "email": "Email",
-    "phone": "Phone",
-    "company": "Company",
-    "subject": "Subject",
-    "message": "Tell us about your challenge",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "success": "Message sent successfully! We'll get back to you soon.",
-    "error": "Error sending. Please try again.",
-    "required": "Required field",
-    "invalidEmail": "Invalid email",
-    "sidebar": {
-      "title": "Schedule a call",
-      "description": "30-minute discovery sessions to quickly map automation opportunities.",
-      "cta": "Schedule via WhatsApp"
-    }
+    "title": "Let's Talk",
+    "subtitle": "Get in touch and discover how we can transform your business",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send Message",
+      "submitting": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Error sending. Please try again."
+    },
+    "whatsapp": "Prefer WhatsApp?",
+    "whatsappCta": "Chat on WhatsApp"
   },
   "footer": {
     "tagline": "Automation. Management & Performance",
-    "servicesTitle": "Services",
-    "companyTitle": "Company",
-    "copyright": "© {year} FCM TECH. All rights reserved."
+    "services": "Services",
+    "company": "Company",
+    "contact": "Contact",
+    "rights": "All rights reserved."
   },
-  "intro": {
-    "line1": "FCM TECH",
-    "line2": "Automation. Management & Performance",
-    "tagline": "Automation • Management • Performance"
-  },
-  "language": {
-    "pt-BR": "Português (Brasil)",
-    "pt-PT": "Português",
-    "en": "English"
+  "lgpd": {
+    "title": "Your Privacy",
+    "subtitle": "We respect your data",
+    "description": "We use cookies and similar technologies to improve your experience, personalize content and analyze our traffic. By continuing to browse, you agree to our Privacy Policy in compliance with data protection regulations.",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "necessary": "Necessary Cookies",
+    "necessaryDesc": "Essential for website functionality",
+    "analytics": "Analytics Cookies",
+    "analyticsDesc": "Help us understand how you use the site",
+    "marketing": "Marketing Cookies",
+    "marketingDesc": "Used for personalized advertising",
+    "required": "Required",
+    "optional": "Optional",
+    "acceptNecessary": "Accept Necessary",
+    "acceptAll": "Accept All",
+    "privacyNote": "For more information, see our",
+    "privacyLink": "Privacy Policy"
   }
 }
