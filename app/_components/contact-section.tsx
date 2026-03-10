@@ -142,9 +142,10 @@ export function ContactSection({ t, locale }: ContactSectionProps) {
                 <div className="w-12 h-12 rounded-lg bg-accent-gold/10 flex items-center justify-center mb-4">
                   <MessageCircle className="w-6 h-6 text-accent-gold" />
                 </div>
-                <h3 className="text-lg font-bold text-text-primary mb-2">{t('contact.whatsapp')}</h3>
+                <h3 className="text-lg font-bold text-text-primary mb-2">{t('contact.sidebar.title')}</h3>
+                <p className="text-sm text-text-secondary mb-4">{t('contact.sidebar.description')}</p>
                 <a href="https://wa.me/5561993270174" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 w-full px-5 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition-colors justify-center">
-                  <MessageCircle className="w-5 h-5" /> {t('contact.whatsappCta')}
+                  <MessageCircle className="w-5 h-5" /> {t('contact.sidebar.cta')}
                 </a>
               </div>
               <div className="border-t border-border-light pt-6 space-y-3">

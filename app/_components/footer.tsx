@@ -39,27 +39,28 @@ export function Footer({ t }: FooterProps) {
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.services')}</h4>
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.servicesTitle')}</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
-              {['Consultoria', 'Automação', 'Gestão de Projetos', 'Desenvolvimento', 'Identidade Visual'].map((item) => (
-                <li key={item}><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{item}</button></li>
-              ))}
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{t('footer.services.consulting')}</button></li>
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{t('footer.services.automation')}</button></li>
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{t('footer.services.management')}</button></li>
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{t('footer.services.webDev')}</button></li>
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-accent-gold transition-colors">{t('footer.services.branding')}</button></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.company')}</h4>
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.companyTitle')}</h4>
             <ul className="space-y-2 text-sm text-text-secondary">
-              <li><button onClick={() => scrollToSection('cases')} className="hover:text-accent-gold transition-colors">Cases</button></li>
-              <li><button onClick={() => scrollToSection('about')} className="hover:text-accent-gold transition-colors">Sobre</button></li>
-              <li><button onClick={() => scrollToSection('contact')} className="hover:text-accent-gold transition-colors">Contato</button></li>
+              <li><button onClick={() => scrollToSection('cases')} className="hover:text-accent-gold transition-colors">{t('footer.company.cases')}</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="hover:text-accent-gold transition-colors">{t('footer.company.contact')}</button></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.contact')}</h4>
+            <h4 className="text-sm font-semibold text-text-primary mb-3">{t('footer.contactTitle')}</h4>
             <div className="space-y-2 text-sm text-text-secondary">
               <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-accent-gold" /> comercial@fcmtech.com.br</div>
               <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-accent-gold" /> +55 61 99327-0174</div>
@@ -68,7 +69,7 @@ export function Footer({ t }: FooterProps) {
         </div>
 
         <div className="mt-8 pt-6 border-t border-border-light text-center text-sm text-text-muted">
-          © {currentYear} FCM TECH. {t('footer.rights')}
+          {t('footer.copyright')}
         </div>
       </div>
     </footer>

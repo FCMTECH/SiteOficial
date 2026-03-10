@@ -8,15 +8,7 @@ import {
   FolderKanban, 
   Code2,
   Palette,
-  Check,
-  Server,
-  Brain,
-  Globe,
-  Smartphone,
-  Database,
-  Cloud,
-  Bot,
-  Sparkles
+  Check
 } from 'lucide-react';
 
 interface ServicesSectionProps {
@@ -25,21 +17,14 @@ interface ServicesSectionProps {
 }
 
 const mainServices = [
-  { 
-    icon: LineChart, 
-    key: 'consulting',
-    color: 'accent-gold'
-  },
-  { 
-    icon: Cog, 
-    key: 'automation',
-    color: 'accent-gold'
-  },
-  { 
-    icon: FolderKanban, 
-    key: 'management',
-    color: 'accent-gold'
-  },
+  { icon: LineChart, key: 'consulting' },
+  { icon: Cog, key: 'automation' },
+  { icon: FolderKanban, key: 'management' },
+];
+
+const extraServices = [
+  { icon: Code2, key: 'webDev' },
+  { icon: Palette, key: 'branding' },
 ];
 
 export function ServicesSection({ t, tArray }: ServicesSectionProps) {
@@ -47,11 +32,7 @@ export function ServicesSection({ t, tArray }: ServicesSectionProps) {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section 
-      id="services" 
-      ref={ref}
-      className="py-24 md:py-32 bg-bg-tertiary"
-    >
+    <section id="services" ref={ref} className="py-24 md:py-32 bg-bg-tertiary">
       <div className="container-premium px-4">
         {/* Header */}
         <motion.div
@@ -68,8 +49,8 @@ export function ServicesSection({ t, tArray }: ServicesSectionProps) {
           </p>
         </motion.div>
 
-        {/* Main Services Grid - 3 colunas */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        {/* Main Services - 3 colunas */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           {mainServices.map((service, index) => {
             const Icon = service.icon;
             const items = tArray(`services.${service.key}.items`);
@@ -80,7 +61,6 @@ export function ServicesSection({ t, tArray }: ServicesSectionProps) {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
               >
                 <div className="bg-white rounded-2xl p-6 border border-border-light hover:border-accent-gold/30 transition-all duration-300 hover:shadow-lg h-full">
                   <div className="w-12 h-12 rounded-xl bg-accent-gold/10 flex items-center justify-center mb-4">
@@ -114,113 +94,35 @@ export function ServicesSection({ t, tArray }: ServicesSectionProps) {
           })}
         </div>
 
-        {/* Desenvolvimento & Tecnologia - Card Grande */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mb-8"
-        >
-          <div className="bg-white rounded-2xl p-8 border border-border-light hover:border-accent-gold/30 transition-all duration-300 hover:shadow-lg">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-accent-gold/10 flex items-center justify-center">
-                <Code2 className="w-7 h-7 text-accent-gold" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-text-primary">
-                  {t('services.development.title')}
-                </h3>
-                <p className="text-sm text-text-secondary">
-                  {t('services.development.subtitle')}
-                </p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Desenvolvimento de Software */}
-              <div className="bg-bg-tertiary rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Globe className="w-5 h-5 text-accent-gold" />
-                  <h4 className="font-semibold text-text-primary">{t('services.development.software.title')}</h4>
+        {/* Extra Services - 2 colunas */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          {extraServices.map((service, index) => {
+            const Icon = service.icon;
+            
+            return (
+              <motion.div
+                key={service.key}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+              >
+                <div className="bg-white rounded-xl p-5 border border-border-light hover:border-accent-gold/30 transition-all duration-300 hover:shadow-lg flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-6 h-6 text-accent-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-text-primary">
+                      {t(`services.${service.key}.title`)}
+                    </h3>
+                    <p className="text-sm text-text-secondary">
+                      {t(`services.${service.key}.description`)}
+                    </p>
+                  </div>
                 </div>
-                <ul className="space-y-2">
-                  {tArray('services.development.software.items').map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-                      <Check className="w-3.5 h-3.5 text-accent-gold mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Infraestrutura & DevOps */}
-              <div className="bg-bg-tertiary rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Server className="w-5 h-5 text-accent-gold" />
-                  <h4 className="font-semibold text-text-primary">{t('services.development.infra.title')}</h4>
-                </div>
-                <ul className="space-y-2">
-                  {tArray('services.development.infra.items').map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-                      <Check className="w-3.5 h-3.5 text-accent-gold mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Inteligência Artificial */}
-              <div className="bg-bg-tertiary rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Brain className="w-5 h-5 text-accent-gold" />
-                  <h4 className="font-semibold text-text-primary">{t('services.development.ai.title')}</h4>
-                </div>
-                <ul className="space-y-2">
-                  {tArray('services.development.ai.items').map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
-                      <Check className="w-3.5 h-3.5 text-accent-gold mt-0.5 flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Tecnologias */}
-            <div className="mt-6 pt-6 border-t border-border-light">
-              <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t('services.development.stack')}</p>
-              <div className="flex flex-wrap gap-2">
-                {['React', 'Next.js', 'Node.js', 'Python', 'TypeScript', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'OpenAI', 'LangChain'].map((tech) => (
-                  <span key={tech} className="px-3 py-1 bg-accent-gold/10 text-accent-gold-dark text-xs rounded-full font-medium">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Identidade Visual */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="max-w-md mx-auto"
-        >
-          <div className="bg-white rounded-xl p-5 border border-border-light hover:border-accent-gold/30 transition-all duration-300 hover:shadow-lg flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-accent-gold/10 flex items-center justify-center flex-shrink-0">
-              <Palette className="w-6 h-6 text-accent-gold" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-text-primary">
-                {t('services.branding.title')}
-              </h3>
-              <p className="text-sm text-text-secondary">
-                {t('services.branding.subtitle')}
-              </p>
-            </div>
-          </div>
-        </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

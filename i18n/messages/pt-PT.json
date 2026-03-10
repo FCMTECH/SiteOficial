@@ -41,26 +41,13 @@
       "items": ["Metodologias ágeis", "PMO estruturado", "Dashboards em tempo real", "Gestão de riscos"],
       "result": "98% on-time"
     },
-    "development": {
-      "title": "Desenvolvimento & Tecnologia",
-      "subtitle": "Soluções completas de software, infraestrutura e IA",
-      "stack": "Stack de Tecnologias",
-      "software": {
-        "title": "Desenvolvimento de Software",
-        "items": ["Aplicações Web e Mobile", "APIs e Microsserviços", "Sistemas Corporativos (ERP/CRM)", "E-commerce e Marketplaces", "Portais e Intranets"]
-      },
-      "infra": {
-        "title": "Infraestrutura & DevOps",
-        "items": ["Cloud Computing (AWS, Azure, GCP)", "CI/CD e Automação de Deploy", "Containers e Kubernetes", "Monitorização e Observabilidade", "Segurança e Compliance"]
-      },
-      "ai": {
-        "title": "Inteligência Artificial",
-        "items": ["Chatbots e Assistentes Virtuais", "Machine Learning e Análise Preditiva", "Processamento de Linguagem Natural", "Automação com IA Generativa", "Integração com LLMs (GPT, Claude)"]
-      }
+    "webDev": {
+      "title": "Desenvolvimento Web",
+      "description": "Sites, sistemas e aplicações à medida"
     },
     "branding": {
       "title": "Identidade Visual",
-      "subtitle": "Marca, design e comunicação visual"
+      "description": "Marca, design e comunicação visual"
     }
   },
   "cases": {
@@ -107,15 +94,29 @@
       "success": "Mensagem enviada com sucesso!",
       "error": "Erro ao enviar. Tente novamente."
     },
-    "whatsapp": "Prefere WhatsApp?",
-    "whatsappCta": "Chamar no WhatsApp"
+    "sidebar": {
+      "title": "Prefere WhatsApp?",
+      "description": "Resposta rápida em horário comercial",
+      "cta": "Chamar no WhatsApp"
+    }
   },
   "footer": {
     "tagline": "Automação. Gestão & Performance",
-    "services": "Serviços",
-    "company": "Empresa",
-    "contact": "Contacto",
-    "rights": "Todos os direitos reservados."
+    "servicesTitle": "Serviços",
+    "companyTitle": "Empresa",
+    "services": {
+      "consulting": "Consultoria",
+      "automation": "Automação",
+      "management": "Gestão de Projetos",
+      "webDev": "Desenvolvimento Web",
+      "branding": "Identidade Visual"
+    },
+    "company": {
+      "cases": "Casos de Sucesso",
+      "contact": "Vamos Conversar"
+    },
+    "contactTitle": "Vamos Conversar",
+    "copyright": "© 2024 FCM TECH. Todos os direitos reservados."
   },
   "lgpd": {
     "title": "A Sua Privacidade",
