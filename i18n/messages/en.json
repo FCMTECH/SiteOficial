@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "title": "FCM TECH — Automation. Management & Performance",
+    "description": "Practical consulting, automation with tools you already use, project management and visual identity — we deliver measurable results and immediate application."
+  },
+  "nav": {
+    "services": "Services",
+    "cases": "Cases",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Get a Quote"
+  },
+  "hero": {
+    "kicker": "FCM TECH",
+    "headline": "Automation. Management & Performance",
+    "subheadline": "Practical consulting, automation with tools you already use, project management and visual identity — we deliver measurable results and immediate application.",
+    "cta1": "Get a Quote",
+    "cta2": "View Services"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Complete solutions to transform your business operations",
+    "consulting": {
+      "title": "Consulting",
+      "subtitle": "Process & Financial Optimization",
+      "items": ["Complete diagnosis", "Process mapping", "Action plan with KPIs", "Financial dashboard", "Team training"],
+      "result": "Cost reduction and consistent revenue growth"
+    },
+    "automation": {
+      "title": "Automation",
+      "subtitle": "Google, Microsoft, Zapier/Make",
+      "items": ["Apps Script, Sheets, Forms", "Power Automate, Power BI", "API integrations / Zapier / Make", "Documentation and testing"],
+      "result": "Less rework and faster decisions"
+    },
+    "projectMgmt": {
+      "title": "Project Management",
+      "subtitle": "Agile & Traditional",
+      "items": ["Planning and scope", "Roadmaps and Sprints", "Reports and risk mitigation", "ClickUp, Jira, Asana, MS Project"],
+      "result": "Predictable deliveries and executive control"
+    },
+    "webDev": {
+      "title": "Web Development",
+      "description": "Rapid prototypes, basic SEO, integrated forms and professional deployment."
+    },
+    "branding": {
+      "title": "Visual Identity",
+      "description": "Vector files, brandbook, templates and print/digital materials."
+    }
+  },
+  "cases": {
+    "title": "Cases & Clients",
+    "subtitle": "Companies that trust FCM TECH",
+    "stn": "Operational management and revenue improvement",
+    "tse": "Team coordination and critical infrastructure",
+    "panasonic": "Implementation orchestration and adoption",
+    "pfal": "Implementation orchestration and adoption",
+    "pmdf": "Implementation orchestration and adoption",
+    "dpu": "Implementation orchestration and adoption",
+    "partners": "Technology Partners"
+  },
+  "about": {
+    "title": "About FCM TECH",
+    "p1": "We are a technology consultancy focused on practical and measurable results. We combine automation, project management and strategy to transform operations of companies of all sizes.",
+    "p2": "Our approach is direct: precise diagnosis, rapid implementation and continuous monitoring. We work with the tools your team already knows, eliminating learning curves.",
+    "stat1Label": "Projects Delivered",
+    "stat1Value": "150",
+    "stat2Label": "Active Clients",
+    "stat2Value": "40",
+    "stat3Label": "Years in Market",
+    "stat3Value": "8"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Talk to us for a free initial diagnosis. Send your project details and we'll respond with a practical proposal.",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "subject": "Subject",
+    "message": "Tell us about your challenge",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "error": "Error sending. Please try again.",
+    "required": "Required field",
+    "invalidEmail": "Invalid email",
+    "sidebar": {
+      "title": "Schedule a call",
+      "description": "30-minute discovery sessions to quickly map automation opportunities.",
+      "cta": "Schedule via WhatsApp"
+    }
+  },
+  "footer": {
+    "tagline": "Automation. Management & Performance",
+    "servicesTitle": "Services",
+    "companyTitle": "Company",
+    "copyright": "© {year} FCM TECH. All rights reserved."
+  },
+  "intro": {
+    "line1": "FCM TECH",
+    "line2": "Automation. Management & Performance",
+    "tagline": "Automation • Management • Performance"
+  },
+  "language": {
+    "pt-BR": "Português (Brasil)",
+    "pt-PT": "Português",
+    "en": "English"
+  }
+}
